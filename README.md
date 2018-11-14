@@ -13,6 +13,18 @@ https://docs.api.getpostman.com/?_ga=2.61941868.1709674798.1542076726-139298275.
 https://go.postman.co/integrations/services/pm_pro_api
 
 
+### npmとしてインストールする場合
+
+他のnpmにはpageckage.jsonに以下のようにして組み込む
+```
+...
+"dependencies": {
+    "swagger2postman": "https://github.com/campfire-inc/swagger2postman.git"
+}
+...
+```
+
+
 ### configファイルの作成
 以下の内容のconfig.jsファイルを作成し
 ```
@@ -39,10 +51,10 @@ module.exports = {
 ```
 以下のようなファイル(convert_upload.js)として設定して利用する。
 ```
-const convert_upload = require('convert_upload'),
+const swagger2postman = require('swagger2postman'),
       config = require('./config.js');
 
-convert_upload(config);
+swagger2postman.convert_upload(config);
 ```
 
 実行コマンド例

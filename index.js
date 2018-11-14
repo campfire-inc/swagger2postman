@@ -82,6 +82,8 @@ function convert_upload(config) {
     }
 }
 
-module.exports = function (config) {
-  return convert_upload(config);
-};
+swagger2postman = {
+    convert_upload: convert_upload
+}
+
+module.exports = swagger2postman;
