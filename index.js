@@ -47,7 +47,7 @@ function updatePostman(newFileName, collection_uid) {
     });
 }
 
-function updateCollection(newFileName) {
+function updateCollection(newFileName, config) {
 
     var data = fs.readFileSync('./' + newFileName, 'utf8');
 
@@ -62,21 +62,21 @@ function updateCollection(newFileName) {
     newFile.collection = file;
 
     updateLocalCollection(newFileName, newFile);
-    updatePostman(newFileName, coll.collection_uid);
+    updatePostman(newFileName, coll.collection_uid, config);
 }
 
 function convert_upload(config) {
     if(config && typeof config === 'object'){
         config.collections.forEach( function (collection) {
+            var config = this;
             var originalFileName = collection.from;
             var newFileName = collection.to;
 
             handleConversion(originalFileName, newFileName);
-            if(this.upload){
-                updateCollection(newFileName);
+            if(config.upload){
+                updateCollection(newFileName, config);
             }
-        }.bind(config)
-        );
+        }.bind(config));
     } else {
         console.log("configファイルを設定してください。")
     }
