@@ -20,7 +20,7 @@ function updateLocalCollection(newFileName, newFile) {
     console.log('writing to ' + newFileName);
 }
 
-function updatePostman(newFileName, collection_uid) {
+function updatePostman(newFileName, collection_uid, config) {
     var data = fs.readFileSync('./' + newFileName, 'utf8');
 
     var postmanAPIKey = config.key;
