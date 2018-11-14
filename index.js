@@ -66,6 +66,7 @@ function updateCollection(newFileName) {
 }
 
 function convert_upload(config) {
+    console.log(config);
     if(config && typeof config === 'object'){
         config.collections.forEach( function (collection) {
             var originalFileName = collection.from;
