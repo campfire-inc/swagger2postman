@@ -1,7 +1,19 @@
 #swaggerファイルをpostman設定ファイルに変換＋postmanにアップロード
 
-###使用する際の前準備
+##使用する際の前準備
 
+### postmanAPI
+https://docs.api.getpostman.com/?_ga=2.61941868.1709674798.1542076726-139298275.1540453845#api-reference
+
+collection情報の取得は
+https://docs.api.getpostman.com/?_ga=2.61941868.1709674798.1542076726-139298275.1540453845#8ca888b7-ef54-f3b4-312f-3f3e2e2cf04e
+のGET All Collections,GET Single Collectionを参照
+
+### postmanAPIKeyの登録
+https://go.postman.co/integrations/services/pm_pro_api
+
+
+### configファイルの作成
 以下の内容のconfig.jsファイルを作成し
 ```
 module.exports = {
