@@ -66,17 +66,17 @@ function updateCollection(newFileName) {
 }
 
 function convert_upload(config) {
-    console.log(config);
     if(config && typeof config === 'object'){
         config.collections.forEach( function (collection) {
             var originalFileName = collection.from;
             var newFileName = collection.to;
 
             handleConversion(originalFileName, newFileName);
-            if(config.upload){
+            if(this.upload){
                 updateCollection(newFileName);
             }
-        });
+        }.bind(config)
+        );
     } else {
         console.log("configファイルを設定してください。")
     }
