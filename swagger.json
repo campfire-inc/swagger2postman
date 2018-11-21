@@ -1,0 +1,1139 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a simple API",
+    "version" : "1.0.0",
+    "title" : "Campfire API first commit",
+    "contact" : {
+      "email" : "info@camp-fire.jp"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/campfirejp/campfire/1.0.0",
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "schemes" : [ "https" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "security" : [ {
+    "api_key" : [ ]
+  } ],
+  "paths" : {
+    "/categories" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Categories"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/categories/{category}" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/categories/{category}/projects" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/areas/{area_slug}/{area_user_slug}/projects" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "area_slug",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "area_user_slug",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "area_slug",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "area_user_slug",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects/search" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "operationId" : "searchProject",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "word",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.word" : "method.request.querystring.word"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects/popular" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "operationId" : "popularProject",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.slug" : "method.request.querystring.slug"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects/fresh" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "operationId" : "freshProject",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.slug" : "method.request.querystring.slug"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects/most_funded" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "operationId" : "mostFundedProject",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.slug" : "method.request.querystring.slug"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects/last_spurt" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "operationId" : "lastSpurtProject",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.slug" : "method.request.querystring.slug"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "default" : 20,
+          "maximum" : 100,
+          "minimum" : 0
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.page" : "method.request.querystring.page",
+            "integration.request.querystring.type" : "method.request.querystring.limit"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/projects/{projectId}" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "operationId" : "GetProject",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "projectId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Project"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.path.projectId" : "method.request.path.projectId"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "projectId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    },
+    "/" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "default" : 20,
+          "maximum" : 100,
+          "minimum" : 0
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Projects"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "requestParameters" : {
+            "integration.request.querystring.page" : "method.request.querystring.page",
+            "integration.request.querystring.type" : "method.request.querystring.limit"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "type" : "mock"
+        }
+      },
+      "options" : {
+        "tags" : [ "developers" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Empty"
+            }
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{\"statusCode\": 200}"
+          },
+          "type" : "mock"
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "api_key" : {
+      "type" : "apiKey",
+      "name" : "x-api-key",
+      "in" : "header"
+    }
+  },
+  "definitions" : {
+    "Projects" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Project"
+      }
+    },
+    "Project" : {
+      "type" : "object",
+      "required" : [ "backer_count", "backer_total", "id", "limit_date", "main_image", "name", "project_owner", "short_blurb", "status", "success_rate", "target_amount", "url" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "プロジェクトの名前"
+        },
+        "short_blurb" : {
+          "type" : "string",
+          "example" : "プロジェクの概要"
+        },
+        "url" : {
+          "type" : "string",
+          "example" : "http://localhost.com:3000/projects/view/1",
+          "pattern" : "^https:\\/\\//"
+        },
+        "main_image" : {
+          "$ref" : "#/definitions/Project_main_image"
+        },
+        "project_owner" : {
+          "$ref" : "#/definitions/Project_project_owner"
+        },
+        "backer_total" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "target_amount" : {
+          "type" : "integer",
+          "example" : 0
+        },
+        "success_rate" : {
+          "type" : "integer",
+          "example" : 0
+        },
+        "backer_count" : {
+          "type" : "integer",
+          "example" : 0
+        },
+        "limit_date" : {
+          "type" : "string",
+          "example" : "20日"
+        },
+        "status" : {
+          "type" : "string",
+          "example" : "pre"
+        },
+        "category" : {
+          "$ref" : "#/definitions/Category"
+        }
+      },
+      "example" : {
+        "backer_total" : 1,
+        "target_amount" : 0,
+        "limit_date" : "20日",
+        "main_image" : {
+          "sp_url" : "http://localhost.com:3000/uploads/project_version/image/XXX/thumb_xxxx.png",
+          "pc_url" : "http://localhost.com:3000/uploads/project_version/image/XXX/medium_xxxx.png"
+        },
+        "url" : "http://localhost.com:3000/projects/view/1",
+        "backer_count" : 0,
+        "short_blurb" : "プロジェクの概要",
+        "project_owner" : {
+          "name" : "hogehoge",
+          "url" : "https://localhost.com:3000/profile/ProjectOwner"
+        },
+        "name" : "プロジェクトの名前",
+        "id" : 1,
+        "category" : {
+          "name" : "カテゴリー名",
+          "description" : "カテゴリー概要",
+          "slug" : "category_en_name"
+        },
+        "success_rate" : 0,
+        "status" : "pre"
+      }
+    },
+    "Empty" : {
+      "type" : "object",
+      "title" : "Empty Schema"
+    },
+    "Category" : {
+      "type" : "object",
+      "required" : [ "description", "name", "slug" ],
+      "properties" : {
+        "slug" : {
+          "type" : "string",
+          "example" : "category_en_name"
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "カテゴリー名"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "カテゴリー概要"
+        }
+      },
+      "example" : {
+        "name" : "カテゴリー名",
+        "description" : "カテゴリー概要",
+        "slug" : "category_en_name"
+      }
+    },
+    "Categories" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Category"
+      }
+    },
+    "Project_main_image" : {
+      "properties" : {
+        "pc_url" : {
+          "type" : "string",
+          "example" : "http://localhost.com:3000/uploads/project_version/image/XXX/medium_xxxx.png",
+          "pattern" : "^https:\\/\\//"
+        },
+        "sp_url" : {
+          "type" : "string",
+          "example" : "http://localhost.com:3000/uploads/project_version/image/XXX/thumb_xxxx.png",
+          "pattern" : "^https:\\/\\//"
+        }
+      },
+      "example" : {
+        "sp_url" : "http://localhost.com:3000/uploads/project_version/image/XXX/thumb_xxxx.png",
+        "pc_url" : "http://localhost.com:3000/uploads/project_version/image/XXX/medium_xxxx.png"
+      }
+    },
+    "Project_project_owner" : {
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "example" : "hogehoge"
+        },
+        "url" : {
+          "type" : "string",
+          "example" : "https://localhost.com:3000/profile/ProjectOwner",
+          "pattern" : "^https:\\/\\//"
+        }
+      },
+      "example" : {
+        "name" : "hogehoge",
+        "url" : "https://localhost.com:3000/profile/ProjectOwner"
+      }
+    }
+  },
+  "x-amazon-apigateway-request-validator" : "本文、クエリ文字列パラメータ、およびヘッダーの検証",
+  "x-amazon-apigateway-integration" : {
+    "responses" : {
+      "default" : {
+        "statusCode" : "200",
+        "responseParameters" : {
+          "method.response.header.Content-Type" : "'text/html'",
+          "method.response.header.Access-Control-Allow-Origin" : "'https://exodus.jp'"
+        },
+        "responseTemplates" : {
+          "text/html" : ""
+        }
+      }
+    },
+    "passthroughBehavior" : "when_no_match",
+    "requestTemplates" : {
+      "application/json" : "{\"statusCode\": 200}"
+    },
+    "type" : "mock"
+  },
+  "x-amazon-apigateway-request-validators" : {
+    "params-only" : {
+      "validateRequestParameters" : true,
+      "validateRequestBody" : false
+    },
+    "本文、クエリ文字列パラメータ、およびヘッダーの検証" : {
+      "validateRequestParameters" : true,
+      "validateRequestBody" : true
+    }
+  }
+}
