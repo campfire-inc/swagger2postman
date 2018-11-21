@@ -1,6 +1,6 @@
-#swaggerファイルをpostman設定ファイルに変換＋postmanにアップロード
+# swaggerファイルをpostman設定ファイルに変換＋postmanにアップロード
 
-##使用する際の前準備
+## 使用する際の前準備
 
 ### postmanAPI
 https://docs.api.getpostman.com/?_ga=2.61941868.1709674798.1542076726-139298275.1540453845#api-reference
