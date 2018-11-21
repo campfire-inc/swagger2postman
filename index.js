@@ -40,7 +40,8 @@ function downloadCollection(swaggerJson, newFileName, collection_uid, key, uploa
 
     request(getOptions, function (error, response, postmanJson) {
         if (error) throw new Error(error);
-        swaggerJson.collection.event = postmanJson.collection.event;
+        swaggerJson.collection.event = extend(true, [], swaggerJson.collection.event, postmanJson.collection.event)
+        swaggerJson.collection.variables = extend(true, [], swaggerJson.collection.variables, postmanJson.collection.variables)
         var json = JSON.stringify(swaggerJson.collection, null, 2);
         fs.writeFileSync(newFileName, json);
         if(upload){
