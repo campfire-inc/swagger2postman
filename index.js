@@ -68,7 +68,9 @@ function downloadCollection(swaggerJson, postmanFileName, collection_uid, config
         if (error) throw new Error(error);
         swaggerJson.collection.event = extend(true, [], swaggerJson.collection.event, postmanJson.collection.event)
         delete swaggerJson.collection.variables
-        swaggerJson.collection.variable = extend(true, [], swaggerJson.collection.variable, postmanJson.collection.variable)
+        swaggerJson.collection.variable = postmanJson.collection.variable.filter(function(value) {
+            return value.key && !value.disabled;
+        });
         var json = JSON.stringify(swaggerJson.collection, null, 2);
         fs.writeFileSync(postmanFileName, json);
         if(config.upload){
