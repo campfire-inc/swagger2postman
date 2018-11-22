@@ -31,10 +31,12 @@ https://go.postman.co/integrations/services/pm_pro_api
 module.exports = {
     "collections": [
         {
-            "from": "xxxxx.json", //読み込むswaggerファイル名
-            "to": "yyyy.json", //書き出すpostmanファイル名
-            "collection_uid": "xxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", //コレクションのuid
-            "collection_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" //コレクションのid
+            "swagger_file_name": "xxxxx.json", // 読み込むswaggerファイル名
+            "postman_file_name": "yyyy.json", // 書き出すpostmanファイル名
+            "environment_file_name": "zzz.json", // 環境変数ファイル名
+            "collection_uid": "xxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // コレクションのuid＊
+            "collection_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // コレクションのid
+            "environment_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" // 環境変数ID
         },
         //複数のコレクションに対応する場合は同フォーマットで追記。
         {
@@ -47,6 +49,7 @@ module.exports = {
     "key": "xxxxxxxxxxxx", //postmanのAPI_KEY
     "upload": true //アップロードするかどうか
 };
+＊collectionIDはpostmanでexport→置き換え作業をすると変化するので注意
 
 ```
 以下のようなファイル(convert_upload.js)として設定して利用する。

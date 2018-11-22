@@ -34,7 +34,6 @@ function downloadEnvironment(environmentFileName, environmentId, key) {
             format: '2.1.0'
         },
         headers: {
-            'Postman-Token': '4122abb3-6098-6906-e172-49334961f595',
             'Cache-Control': 'no-cache',
             'X-Api-Key': key,
             'Content-Type': 'application/json'
@@ -58,7 +57,6 @@ function downloadCollection(swaggerJson, postmanFileName, collection_uid, config
             format: '2.1.0'
         },
         headers: {
-            'Postman-Token': '4122abb3-6098-6906-e172-49334961f595',
             'Cache-Control': 'no-cache',
             'X-Api-Key': config.key,
             'Content-Type': 'application/json'
@@ -69,6 +67,7 @@ function downloadCollection(swaggerJson, postmanFileName, collection_uid, config
     request(getOptions, function (error, response, postmanJson) {
         if (error) throw new Error(error);
         swaggerJson.collection.event = extend(true, [], swaggerJson.collection.event, postmanJson.collection.event)
+        delete swaggerJson.collection.variables
         swaggerJson.collection.variable = extend(true, [], swaggerJson.collection.variable, postmanJson.collection.variable)
         var json = JSON.stringify(swaggerJson.collection, null, 2);
         fs.writeFileSync(postmanFileName, json);
@@ -95,7 +94,6 @@ function updatePostman(newFileName, collection_uid, key) {
             format: '2.1.0'
         },
         headers: {
-            'Postman-Token': '4122abb3-6098-6906-e172-49334961f595',
             'Cache-Control': 'no-cache',
             'X-Api-Key': postmanAPIKey,
             'Content-Type': 'application/json'
