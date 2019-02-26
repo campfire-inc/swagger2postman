@@ -10,7 +10,7 @@
     "json-schema-faker": "0.4.7",
     "lodash": "^4.17.11",
     "node-uuid": "^1.4.3",
-    "postman-collection": "^3.0.7",
+    "postman-collection": "^3.4.4",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   }

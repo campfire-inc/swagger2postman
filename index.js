@@ -10,6 +10,7 @@ function handleConversion(collection, config) {
     var collectionName = collection.collection_name;
     var environment_file_name = collection.environment_file_name;
     var environment_name = collection.environment_name;
+    var upload = config.upload;
 
     var swaggerObject = JSON.parse(
         fs.readFileSync(swaggerFileName, 'utf8')
