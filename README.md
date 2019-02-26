@@ -26,6 +26,11 @@ https://go.postman.co/integrations/services/pm_pro_api
 
 
 ### configファイルの作成
+これレポジトリはあくまでベースの機能をまとめたもので、実際の利用は
+https://github.com/campfire-inc/campfire-api-swagger-spec.git
+の様にこのレポジトリをimportして利用します。以下利用方法。
+
+collection_name, environment_nameは上記の「collectionの取得は」で確認したものを使用してください。
 以下の内容のconfig.jsファイルを作成し
 ```
 module.exports = {
@@ -34,9 +39,8 @@ module.exports = {
             "swagger_file_name": "xxxxx.json", // 読み込むswaggerファイル名
             "postman_file_name": "yyyy.json", // 書き出すpostmanファイル名
             "environment_file_name": "zzz.json", // 環境変数ファイル名
-            "collection_uid": "xxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // コレクションのuid＊
-            "collection_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // コレクションのid
-            "environment_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" // 環境変数ID
+            "collection_name": "xxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", // コレクションの名前*重複したものは作らない様にしてください。
+            "environment_name": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" // 環境名*重複したものは作らない様にしてください。
         },
         //複数のコレクションに対応する場合は同フォーマットで追記。
         {
@@ -49,7 +53,7 @@ module.exports = {
     "key": "xxxxxxxxxxxx", //postmanのAPI_KEY
     "upload": true //アップロードするかどうか
 };
-＊collectionIDはpostmanでexport→置き換え作業をすると変化するので注意
+＊collectionIDはpostmanでexport→置き換え作業をすると変化するのでIDではなくnameをユニーク情報として利用しています。
 
 ```
 以下のようなファイル(convert_upload.js)として設定して利用する。

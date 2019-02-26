@@ -2,34 +2,64 @@ const fs = require('fs'),
     convert = require('./convert.js'),
     _ = require('lodash'),
     extend = require('extend'),
-    request = require('request');
+    request = require('request-promise');
 
 function handleConversion(collection, config) {
     var swaggerFileName = collection.swagger_file_name;
     var postmanFileName = collection.postman_file_name;
-    var collectionUid = collection.collection_uid;
+    var collectionName = collection.collection_name;
+    var environment_file_name = collection.environment_file_name;
+    var environment_name = collection.environment_name;
+
     var swaggerObject = JSON.parse(
         fs.readFileSync(swaggerFileName, 'utf8')
     );
 
     var conversionResult = convert(swaggerObject);
 
-    downloadEnvironment(collection.environment_file_name, collection.environment_id, config.key);
+    downloadEnvironment(environment_file_name, environment_name, config.key);
 
-    if(collectionUid) {
-        downloadCollection(conversionResult, postmanFileName, collectionUid, config);
-    } else {
-        fs.writeFileSync(postmanFileName, JSON.stringify(conversionResult.collection, null, 2));
-        if(upload){
-            updateCollection(postmanFileName, collectionUid, config.key);
-        }
-    }
-}
-
-function downloadEnvironment(environmentFileName, environmentId, key) {
     var getOptions = {
         method: 'GET',
-        url: 'https://api.getpostman.com/environments/' + environmentId,
+        url: 'https://api.getpostman.com/collections/',
+        qs: {
+            format: '2.1.0'
+        },
+        headers: {
+            'Cache-Control': 'no-cache',
+            'X-Api-Key': config.key,
+            'Content-Type': 'application/json'
+        },
+        json: true
+    };
+    request(getOptions)
+    .then(function (postmanJson) {
+        var collections = postmanJson.collections;
+        if (!collections) throw new Error("collections not found");
+        collections = collections.filter(function(collection) {
+            return collection.name == collectionName;
+        });
+        collections = collections.sort(function(a,b) {
+            return a.id > b.id;
+        });
+        var collectionUid = collections[0].uid;
+        if(collectionUid) {
+            downloadCollection(conversionResult, postmanFileName, collectionUid, config);
+        } else {
+            fs.writeFileSync(postmanFileName, JSON.stringify(conversionResult.collection, null, 2));
+            if(upload){
+                updateCollection(postmanFileName, collectionUid, config.key);
+            }
+        }
+    }).catch(function (error) {
+        throw new Error("collections not found");
+    });
+}
+
+function downloadEnvironment(environmentFileName, environmentName, key) {
+    var getOptions = {
+        method: 'GET',
+        url: 'https://api.getpostman.com/environments/',
         qs: {
             format: '2.1.0'
         },
@@ -41,10 +71,40 @@ function downloadEnvironment(environmentFileName, environmentId, key) {
         json: true
     };
 
-    request(getOptions, function (error, response, environmentJson) {
-        if (error) throw new Error(error);
-        var json = JSON.stringify(environmentJson.environment, null, 2);
-        fs.writeFileSync(environmentFileName, json);
+    request(getOptions)
+    .then(function (environmentJson) {
+        var environments = environmentJson.environments;
+        if (!environments) throw new Error("environments not found");
+        environments = environments.filter(function(environment) {
+            return environment.name == environmentName;
+        });
+        environments = environments.sort(function(a,b) {
+            return a.id > b.id;
+        });
+        var environmentUid = environments[0].uid;
+
+        var getOptions = {
+            method: 'GET',
+            url: 'https://api.getpostman.com/environments/' + environmentUid,
+            qs: {
+                format: '2.1.0'
+            },
+            headers: {
+                'Cache-Control': 'no-cache',
+                'X-Api-Key': key,
+                'Content-Type': 'application/json'
+            },
+            json: true
+        };
+        request(getOptions)
+        .then(function (environmentJson) {
+            var json = JSON.stringify(environmentJson.environment, null, 2);
+            fs.writeFileSync(environmentFileName, json);
+        }).catch(function (error) {
+            throw new Error("environment not found");
+        });
+    }).catch(function (error) {
+        throw new Error("environments not found");
     });
 }
 
@@ -64,10 +124,9 @@ function downloadCollection(swaggerJson, postmanFileName, collection_uid, config
         json: true
     };
 
-    request(getOptions, function (error, response, postmanJson) {
-        if (error) throw new Error(error);
-        swaggerJson.collection.event = extend(true, [], swaggerJson.collection.event, postmanJson.collection.event)
-        delete swaggerJson.collection.variables
+    request(getOptions).then(function (postmanJson) {
+        swaggerJson.collection.event = extend(true, [], swaggerJson.collection.event, postmanJson.collection.event);
+        delete swaggerJson.collection.variables;
         swaggerJson.collection.variable = postmanJson.collection.variable.filter(function(value) {
             return value.key && !value.disabled;
         });
@@ -76,6 +135,8 @@ function downloadCollection(swaggerJson, postmanFileName, collection_uid, config
         if(config.upload){
             updateCollection(postmanFileName, collection_uid, config.key);
         }
+    }).catch(function (error) {
+        throw new Error("collection download failed");
     });
 }
 
@@ -104,9 +165,11 @@ function updatePostman(newFileName, collection_uid, key) {
         json: true
     };
 
-    request(putOptions, function (error, response, body) {
+    request(putOptions).then(function (body) {
         if (error) throw new Error(error);
         console.log(body);
+    }).catch(function (error) {
+        throw new Error("update failed");
     });
 }
 
@@ -133,12 +196,28 @@ function convert_upload(config) {
             handleConversion(collection, config);
         }.bind(config));
     } else {
-        console.log("configファイルを設定してください。")
+        console.log("configファイルを設定してください。");
     }
 }
 
 swagger2postman = {
     convert_upload: convert_upload
-}
+};
 
 module.exports = swagger2postman;
+
+// 開発時に利用
+// convert_upload({
+//     "collections": [
+//         {
+//             //campfireApi
+//             "swagger_file_name": "***.json",  //swagger読み込み用ファイル.json
+//             "postman_file_name": "***.json",   //postman書き出しファイル名
+//             "environment_file_name": "***.json",  //"environment書き出しファイル名
+//             "environment_name": "****",    //読み込むenvironment名
+//             "collection_name": "***",     //読み込むcollection名"
+//         },
+//     ],
+//     "key": "***********************", //postmanAPI_KEY
+//     "upload": false // "postmanへのuploadフラグ"
+// });
