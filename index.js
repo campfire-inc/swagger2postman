@@ -148,9 +148,6 @@ function updateLocalCollection(postmanFileName, newFile) {
 
 function updatePostman(newFileName, collection_uid, key) {
     var data = fs.readFileSync('./' + newFileName, 'utf8');
-
-    var postmanAPIKey = key;
-
     var putOptions = {
         method: 'PUT',
         url: 'https://api.getpostman.com/collections/' + collection_uid,
@@ -159,7 +156,7 @@ function updatePostman(newFileName, collection_uid, key) {
         },
         headers: {
             'Cache-Control': 'no-cache',
-            'X-Api-Key': postmanAPIKey,
+            'X-Api-Key': key,
             'Content-Type': 'application/json'
         },
         body: JSON.parse(data),
@@ -167,7 +164,6 @@ function updatePostman(newFileName, collection_uid, key) {
     };
 
     request(putOptions).then(function (body) {
-        if (error) throw new Error(error);
         console.log(body);
     }).catch(function (error) {
         throw new Error("update failed");
